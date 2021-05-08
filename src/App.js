@@ -3,6 +3,7 @@ import Clarifai from 'clarifai';
 import Logo from './components/Logo/Logo';
 import Rank from './components/Rank/Rank';
 import Navigation from './components/Navigation/Navigation';
+import FaceRecognition from './components/FaceRecognition/FaceRecognition';
 import ImageLinkForm from './components/ImageLinkForm/ImageLinkForm';
 import Particles from 'react-particles-js';
 import './App.css';
@@ -94,6 +95,7 @@ export default class App extends Component {
           onInputChange={this.onInputChange}
           onButtonSubmit={this.onButtonSubmit}
         />
+        <FaceRecognition imageUrl={this.state.imageUrl} />
       </div>
     );
   }
