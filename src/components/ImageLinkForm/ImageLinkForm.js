@@ -9,6 +9,7 @@ export default function ImageLinkForm({ onInputChange, onButtonSubmit }) {
       <div className='center'>
         <div className='form pa4 br3 shadow-4 center'>
           <input
+          placeholder='Enter URL 🔗'
             onChange={onInputChange}
             type='text'
             className='f4 pa2 br3 center w-70'
