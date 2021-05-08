@@ -8,7 +8,6 @@
 }
 
 .inner-element {
-  font-size: 3em;
-  font-style: italic;
-  transform: translateZ(60px);
+  font-size: 3rem;
+  transform: translateZ(50px);
 }
