@@ -1,10 +1,16 @@
 import React, { Component } from 'react';
-import './App.css';
+import Clarifai from 'clarifai';
 import Logo from './components/Logo/Logo';
 import Rank from './components/Rank/Rank';
 import Navigation from './components/Navigation/Navigation';
 import ImageLinkForm from './components/ImageLinkForm/ImageLinkForm';
 import Particles from 'react-particles-js';
+import './App.css';
+
+//You must add your own API key here from Clarifai.
+const app = new Clarifai.App({
+  apiKey: process.env.REACT_APP_CLARIFAI_API_KEY,
+});
 
 const particlesOptions = {
   particles: {
@@ -54,8 +60,10 @@ export default class App extends Component {
   constructor() {
     super();
     this.state = {
-      input: '',
-      imageUrl: '',
+      input:
+        'http://www.guyshachar.com/en/wp-content/ngg/garo-hills-people-and-agriculture/Garo_People_P9040521.jpg',
+      imageUrl:
+        'http://www.guyshachar.com/en/wp-content/ngg/garo-hills-people-and-agriculture/Garo_People_P9040521.jpg',
     };
   }
 
@@ -65,6 +73,14 @@ export default class App extends Component {
 
   onButtonSubmit = () => {
     console.log('click');
+    app.models
+      .predict(Clarifai.FACE_DETECT_MODEL, this.state.input)
+      .then(response => {
+        console.log(response);
+      })
+      .catch(error => {
+        console.error(error);
+      });
   };
 
   render() {
