@@ -5,6 +5,7 @@ import Rank from './components/Rank/Rank';
 import Navigation from './components/Navigation/Navigation';
 import FaceRecognition from './components/FaceRecognition/FaceRecognition';
 import ImageLinkForm from './components/ImageLinkForm/ImageLinkForm';
+import Register from './components/Register/Register';
 import Signin from './components/Signin/Signin';
 import Particles from 'react-particles-js';
 import './App.css';
@@ -65,8 +66,13 @@ export default class App extends Component {
       input: '',
       imageUrl: '',
       box: {},
+      route: 'signin',
     };
   }
+
+  onRouteChange = route => {
+    this.setState({ route });
+  };
 
   onInputChange = event => {
     this.setState({ input: event.target.value });
@@ -76,7 +82,6 @@ export default class App extends Component {
     const image = document.querySelector('#input-image');
     const width = Number(image.width);
     const height = Number(image.height);
-
     const {
       top_row,
       bottom_row,
@@ -111,7 +116,11 @@ export default class App extends Component {
       <div className='App'>
         <Particles params={particlesOptions} className='particles' />
         <Navigation />
-        <Signin />
+        {
+          this.state.route === "signin" ?
+        <Signin onRouteChange={this.onRouteChange} />
+        : <Register/>
+        }
         <Logo />
         <Rank />
         <ImageLinkForm
