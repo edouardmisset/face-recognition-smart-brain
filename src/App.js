@@ -1,3 +1,4 @@
+import React, { Component } from 'react';
 import './App.css';
 import Logo from './components/Logo/Logo';
 import Rank from './components/Rank/Rank';
@@ -49,14 +50,35 @@ const particlesOptions = {
   retina_detect: true,
 };
 
-export default function App() {
-  return (
-    <div className='App'>
-      <Particles params={particlesOptions} className='particles' />
-      <Navigation />
-      <Logo />
-      <Rank />
-      <ImageLinkForm />
-    </div>
-  );
+export default class App extends Component {
+  constructor() {
+    super();
+    this.state = {
+      input: '',
+      imageUrl: '',
+    };
+  }
+
+  onInputChange = event => {
+    console.log(event.target.value);
+  };
+
+  onButtonSubmit = () => {
+    console.log('click');
+  };
+
+  render() {
+    return (
+      <div className='App'>
+        <Particles params={particlesOptions} className='particles' />
+        <Navigation />
+        <Logo />
+        <Rank />
+        <ImageLinkForm
+          onInputChange={this.onInputChange}
+          onButtonSubmit={this.onButtonSubmit}
+        />
+      </div>
+    );
+  }
 }
