@@ -53,10 +53,9 @@ export default function App() {
   return (
     <div className='App'>
       <Particles params={particlesOptions} />
-
-      {/* <Navigation />
       <Logo />
-      <Rank />
+      <Navigation />
+      {/*<Rank />
       <ImageLinkForm /> */}
     </div>
   );

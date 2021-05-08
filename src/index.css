@@ -34,6 +34,7 @@
 
 body {
   margin: 0;
+  padding: 0;
   height: 100vh;
   font-family: var(--font-family-sans-serif);
   -webkit-font-smoothing: antialiased;
@@ -41,20 +42,31 @@ body {
   background: linear-gradient(to bottom right, #36b0ec, #c729a5);
 }
 
-#root {
-  height: 100%;
+.App {
+  text-align: center;
 }
 
-.App {
-  height: 100%;
+.center {
+  display: flex;
+  justify-content: center;
+}
+
+.super-center {
+  display: grid;
+  place-items: center;
 }
 
 #tsparticles {
-  height: 100%;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: -1;
 }
 
-#tsparticles * {
-  height: 100%;
+button {
+  cursor: pointer;
 }
 
 /* Style Broken Images */

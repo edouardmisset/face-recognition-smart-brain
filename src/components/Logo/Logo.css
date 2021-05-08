@@ -1,0 +1,14 @@
+.parallax-effect {
+  width: 7em;
+  height: 7em;
+  background: linear-gradient(to bottom right, #36b0ec, #c729a5);
+  color: white;
+  border-radius: 1em;
+  transform-style: preserve-3d;
+}
+
+.inner-element {
+  font-size: 3em;
+  font-style: italic;
+  transform: translateZ(60px);
+}
