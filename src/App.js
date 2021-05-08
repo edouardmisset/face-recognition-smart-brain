@@ -52,11 +52,11 @@ const particlesOptions = {
 export default function App() {
   return (
     <div className='App'>
-      <Particles params={particlesOptions} />
-      <Logo />
+      <Particles params={particlesOptions} className='particles' />
       <Navigation />
-      {/*<Rank />
-      <ImageLinkForm /> */}
+      <Logo />
+      <Rank />
+      <ImageLinkForm />
     </div>
   );
 }
