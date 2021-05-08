@@ -61,27 +61,49 @@ export default class App extends Component {
   constructor() {
     super();
     this.state = {
-      input:
-        'http://www.guyshachar.com/en/wp-content/ngg/garo-hills-people-and-agriculture/Garo_People_P9040521.jpg',
-      imageUrl:
-        'http://www.guyshachar.com/en/wp-content/ngg/garo-hills-people-and-agriculture/Garo_People_P9040521.jpg',
+      input: '',
+      imageUrl: '',
+      box: {},
     };
   }
 
   onInputChange = event => {
-    console.log(event.target.value);
+    this.setState({ input: event.target.value });
+  };
+
+  calculateFaceLocation = data => {
+    const image = document.querySelector('#input-image');
+    const width = Number(image.width);
+    const height = Number(image.height);
+
+    const {
+      top_row,
+      bottom_row,
+      left_col,
+      right_col,
+    } = data.rawData.outputs[0].data.regions[0].region_info.bounding_box;
+
+    return {
+      topRow: top_row * height,
+      leftCol: left_col * width,
+      bottomRow: height - bottom_row * height,
+      rightCol: width - right_col * width,
+    };
+  };
+
+  displayFaceBox = box => {
+    this.setState({ box: box });
   };
 
   onButtonSubmit = () => {
     console.log('click');
+    this.setState({ imageUrl: this.state.input });
     app.models
       .predict(Clarifai.FACE_DETECT_MODEL, this.state.input)
-      .then(response => {
-        console.log(response);
-      })
-      .catch(error => {
-        console.error(error);
-      });
+      .then(response =>
+        this.displayFaceBox(this.calculateFaceLocation(response))
+      )
+      .catch(console.error);
   };
 
   render() {
@@ -95,7 +117,7 @@ export default class App extends Component {
           onInputChange={this.onInputChange}
           onButtonSubmit={this.onButtonSubmit}
         />
-        <FaceRecognition imageUrl={this.state.imageUrl} />
+        <FaceRecognition imageUrl={this.state.imageUrl} box={this.state.box} />
       </div>
     );
   }
