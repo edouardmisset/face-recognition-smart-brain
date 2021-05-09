@@ -4,12 +4,12 @@ export default function ImageLinkForm({ onInputChange, onButtonSubmit }) {
   return (
     <div>
       <p className='f3'>
-        This Magic 🧠 will detect faces in your pictures. Give it a try!
+        This Magic brain will detect faces in your pictures. Give it a try!
       </p>
       <div className='center'>
         <div className='form pa4 br3 shadow-4 center'>
           <input
-          placeholder='Enter URL 🔗'
+            placeholder='Enter URL 🔗'
             onChange={onInputChange}
             type='text'
             className='f4 pa2 br3 center w-70'
