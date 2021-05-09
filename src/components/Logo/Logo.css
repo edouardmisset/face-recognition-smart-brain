@@ -1,6 +1,6 @@
 .parallax-effect {
-  width: 7rem;
-  height: 7rem;
+  width: 4rem;
+  height: 4rem;
   background: linear-gradient(
     to bottom right,
     hsl(200, 83%, 57%),
@@ -12,6 +12,6 @@
 }
 
 .inner-element {
-  font-size: 3rem;
+  font-size: 2rem;
   transform: translateZ(50px);
 }
