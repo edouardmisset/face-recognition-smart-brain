@@ -1,6 +1,26 @@
 img {
-  width: 500px;
+  /* Responsive image size */
+  max-width: 500px;
   height: auto;
+  font-family: var(--font-sans-serif);
+  font-weight: 300;
+  line-height: 2;
+  text-align: center;
+  display: block;
+  position: relative;
+}
+
+/* Style Broken Images */
+img:before {
+  content: "We're sorry, the image below is broken :(";
+  display: block;
+  margin-bottom: 10px;
+}
+
+img:after {
+  content: '(url: ' attr(src) ')';
+  display: block;
+  font-size: 12px;
 }
 
 .bounding-box {

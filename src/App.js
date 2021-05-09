@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import Clarifai from 'clarifai';
-import Logo from './components/Logo/Logo';
 import Rank from './components/Rank/Rank';
 import Navigation from './components/Navigation/Navigation';
 import FaceRecognition from './components/FaceRecognition/FaceRecognition';
@@ -78,7 +77,7 @@ export default class App extends Component {
       this.setState({ isSignedIn: true });
     }
 
-    this.setState({ route: route });
+    this.setState({ route });
   };
 
   onInputChange = event => {
@@ -129,7 +128,6 @@ export default class App extends Component {
         />
         {route === 'home' ? (
           <>
-            <Logo />
             <Rank />
             <ImageLinkForm
               onInputChange={this.onInputChange}

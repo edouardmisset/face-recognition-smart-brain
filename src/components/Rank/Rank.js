@@ -1,5 +1,3 @@
-import './Rank.css';
-
 export default function Rank() {
   return (
     <div>

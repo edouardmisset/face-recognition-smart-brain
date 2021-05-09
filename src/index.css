@@ -68,30 +68,3 @@ body {
 button {
   cursor: pointer;
 }
-
-/* Style Broken Images */
-img {
-  /* Responsive image size */
-  max-width: 100%;
-  height: auto;
-  font-family: 'Helvetica';
-  font-weight: 300;
-  line-height: 2;
-  text-align: center;
-  width: 100%;
-  height: auto;
-  display: block;
-  position: relative;
-}
-
-img:before {
-  content: "We're sorry, the image below is broken :(";
-  display: block;
-  margin-bottom: 10px;
-}
-
-img:after {
-  content: '(url: ' attr(src) ')';
-  display: block;
-  font-size: 12px;
-}

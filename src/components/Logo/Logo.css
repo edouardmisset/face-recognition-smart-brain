@@ -1,10 +1,14 @@
 .parallax-effect {
-  width: 7em;
-  height: 7em;
-  background: linear-gradient(to bottom right, #36b0ec, #c729a5);
-  color: white;
-  border-radius: 1em;
+  width: 7rem;
+  height: 7rem;
+  background: linear-gradient(
+    to bottom right,
+    hsl(200, 83%, 57%),
+    hsl(313, 66%, 47%)
+  );
+  border-radius: 1rem;
   transform-style: preserve-3d;
+  margin-right: auto;
 }
 
 .inner-element {
