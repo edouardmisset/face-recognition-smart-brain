@@ -1,6 +1,6 @@
 .parallax-effect {
-  width: 4rem;
-  height: 4rem;
+  width: 6rem;
+  height: 6rem;
   background: linear-gradient(
     to bottom right,
     hsl(200, 83%, 57%),
@@ -10,9 +10,27 @@
   transform-style: preserve-3d;
   margin: 1rem;
   margin-right: auto;
+  cursor: default;
 }
 
-.inner-element {
-  font-size: 2rem;
+.back {
+  font-size: 4rem;
   transform: translateZ(50px);
+}
+
+.middle {
+  font-size: 3rem;
+  transform: translateZ(100px);
+}
+
+.front {
+  font-size: 2rem;
+  transform: translateZ(150px);
+}
+
+.superimpose {
+  position: absolute;
+  top: auto;
+  left: auto;
+  transform-style: preserve-3d;
 }
