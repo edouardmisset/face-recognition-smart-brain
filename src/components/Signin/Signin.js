@@ -3,8 +3,40 @@ import React, { Component } from 'react';
 export default class Signin extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      signInEmail: '',
+      signInPassword: '',
+    };
   }
+
+  onEmailChange = e => {
+    this.setState({ signInEmail: e.target.value });
+  };
+
+  onPasswordChange = e => {
+    this.setState({ signInPassword: e.target.value });
+  };
+
+  onSubmitSignIn = () => {
+    fetch('http://localhost:5000/signin', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        email: this.state.signInEmail,
+        password: this.state.signInPassword,
+      }),
+    })
+      .then(response => response.json())
+      .then(user => {
+        if (user?.id) {
+          this.props.loadUser(user);
+          this.props.onRouteChange('home');
+        }
+      })
+      .catch(console.error);
+  };
 
   render() {
     return (
@@ -22,7 +54,7 @@ export default class Signin extends Component {
                   type='email'
                   name='email-address'
                   id='email-address'
-                  // onChange={this.onEmailChange}
+                  onChange={this.onEmailChange}
                 />
               </div>
               <div className='mv3'>
@@ -34,13 +66,13 @@ export default class Signin extends Component {
                   type='password'
                   name='password'
                   id='password'
-                  // onChange={this.onPasswordChange}
+                  onChange={this.onPasswordChange}
                 />
               </div>
             </fieldset>
             <div className=''>
               <input
-                onClick={() => this.props.onRouteChange('home')}
+                onClick={this.onSubmitSignIn}
                 className='b ph3 pv2 input-reset ba b--black bg-transparent grow pointer f6 dib'
                 type='submit'
                 value='Sign in'

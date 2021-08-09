@@ -10,6 +10,41 @@ export default class Register extends Component {
     };
   }
 
+  onNameChange = e => {
+    this.setState({ name: e.target.value });
+  };
+
+  onEmailChange = e => {
+    this.setState({ email: e.target.value });
+  };
+
+  onPasswordChange = e => {
+    this.setState({ password: e.target.value });
+  };
+
+  onSubmitRegister = () => {
+    fetch('http://localhost:5000/register', {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        email: this.state.email,
+        password: this.state.password,
+        name: this.state.name,
+      }),
+    })
+      .then(response => response.json())
+      .then(user => {
+        if (user) {
+          this.props.loadUser(user);
+          this.props.onRouteChange('home');
+        }
+      })
+      .catch(console.error);
+  };
+
   render() {
     return (
       <article className='br3 ba b--black-10 mv4 w-100 w-50-m w-25-l mw6 shadow-5 center'>
@@ -56,8 +91,7 @@ export default class Register extends Component {
             </fieldset>
             <div className=''>
               <input
-                // onClick={this.onSubmitSignIn}
-                onClick={() => this.props.onRouteChange('home')}
+                onClick={this.onSubmitRegister}
                 className='b ph3 pv2 input-reset ba b--black bg-transparent grow pointer f6 dib'
                 type='submit'
                 value='Register'

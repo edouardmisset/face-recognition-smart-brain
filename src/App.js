@@ -67,8 +67,22 @@ export default class App extends Component {
       box: {},
       route: 'signin',
       isSignedIn: false,
+      user: {
+        id: '',
+        name: '',
+        email: '',
+        entries: 0,
+        joined: '',
+      },
     };
   }
+
+  loadUser = user => {
+    this.setState({
+      isSignedIn: true,
+      user: user,
+    });
+  };
 
   onRouteChange = route => {
     if (route === 'signout') {
@@ -88,12 +102,8 @@ export default class App extends Component {
     const image = document.querySelector('#input-image');
     const width = Number(image.width);
     const height = Number(image.height);
-    const {
-      top_row,
-      bottom_row,
-      left_col,
-      right_col,
-    } = data.rawData.outputs[0].data.regions[0].region_info.bounding_box;
+    const { top_row, bottom_row, left_col, right_col } =
+      data.rawData.outputs[0].data.regions[0].region_info.bounding_box;
 
     return {
       topRow: top_row * height,
@@ -107,13 +117,29 @@ export default class App extends Component {
     this.setState({ box: box });
   };
 
-  onButtonSubmit = () => {
+  onPictureSubmit = () => {
     this.setState({ imageUrl: this.state.input });
     app.models
       .predict(Clarifai.FACE_DETECT_MODEL, this.state.input)
-      .then(response =>
-        this.displayFaceBox(this.calculateFaceLocation(response))
-      )
+      .then(response => {
+        if (response) {
+          fetch('http://localhost:5000/image', {
+            method: 'PUT',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              id: this.state.user.id,
+            }),
+          })
+            .then(response => response.json())
+            .then(count =>
+              this.setState(Object.assign(this.state.user, { entries: count }))
+            );
+          this.displayFaceBox(this.calculateFaceLocation(response));
+        }
+      })
+
       .catch(console.error);
   };
 
@@ -128,17 +154,23 @@ export default class App extends Component {
         />
         {route === 'home' ? (
           <>
-            <Rank />
+            <Rank
+              name={this.state.user.name}
+              entries={this.state.user.entries}
+            />
             <ImageLinkForm
               onInputChange={this.onInputChange}
-              onButtonSubmit={this.onButtonSubmit}
+              onButtonSubmit={this.onPictureSubmit}
             />
             <FaceRecognition imageUrl={imageUrl} box={box} />
           </>
         ) : route === 'signin' ? (
-          <Signin onRouteChange={this.onRouteChange} />
+          <Signin loadUser={this.loadUser} onRouteChange={this.onRouteChange} />
         ) : (
-          <Register onRouteChange={this.onRouteChange} />
+          <Register
+            loadUser={this.loadUser}
+            onRouteChange={this.onRouteChange}
+          />
         )}
       </div>
     );
