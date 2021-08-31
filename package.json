@@ -1,6 +1,5 @@
 {
   "name": "face-recognition-smart-brain",
-  "homepage": "https://edouardmisset.github.io/face-recognition-smart-brain/",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
