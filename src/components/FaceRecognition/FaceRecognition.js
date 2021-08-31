@@ -1,15 +1,15 @@
-import './FaceRecognition.css';
+import './FaceRecognition.css'
 
 export default function FaceRecognition({
   imageUrl,
   box: { topRow, rightCol, bottomRow, leftCol },
 }) {
   return (
-    <div className='center mt4'>
-      <div className='mt2 absolute'>
-        {imageUrl && <img id='input-image' src={imageUrl} alt='input' />}
+    <div className="center mt4">
+      <div className="mt2 absolute">
+        {imageUrl && <img id="input-image" src={imageUrl} alt="input" />}
         <div
-          className='bounding-box'
+          className="bounding-box"
           style={{
             top: topRow,
             right: rightCol,
@@ -19,5 +19,5 @@ export default function FaceRecognition({
         ></div>
       </div>
     </div>
-  );
+  )
 }
